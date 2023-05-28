@@ -5,6 +5,8 @@ public class ParticleController : MonoBehaviour
     [SerializeField] private ParticleSystem _exHale; 
     [SerializeField] private ParticleSystem _inHale;
 
+    private const float _delay = 5f;
+
     private void Start()
     {
         Exhale();
@@ -13,12 +15,12 @@ public class ParticleController : MonoBehaviour
     private void Exhale()
     {
         _exHale.Play();
-        Invoke("Inhale", 5);
+        Invoke(nameof(Inhale), _delay);
     }
 
     private void Inhale()
     {
         _inHale.Play();   
-        Invoke("Exhale", 5);
+        Invoke(nameof(Exhale), _delay);
     }
 }
