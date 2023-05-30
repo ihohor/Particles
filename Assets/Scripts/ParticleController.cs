@@ -4,23 +4,38 @@ public class ParticleController : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _exHale; 
     [SerializeField] private ParticleSystem _inHale;
+    [SerializeField] private ParticleSystem _darkExHale;
 
-    private const float _delay = 5f;
+    private const float Delay = 5f;
+
+    private int _inHalesCount = 0;
 
     private void Start()
     {
-        Exhale();
+        Inhale();
     }
 
     private void Exhale()
     {
         _exHale.Play();
-        Invoke(nameof(Inhale), _delay);
+        Invoke(nameof(Inhale), Delay);
     }
 
     private void Inhale()
     {
-        _inHale.Play();   
-        Invoke(nameof(Exhale), _delay);
+        _inHale.Play();
+        _inHalesCount++;
+
+        if (_inHalesCount < 10)
+            Invoke(nameof(Exhale), Delay);
+        else
+            Invoke(nameof(DarkExHale), Delay);
+    }
+
+    private void DarkExHale()
+    {
+        _inHalesCount = 0;
+        _darkExHale.Play();
+        Invoke(nameof(Inhale), Delay);
     }
 }

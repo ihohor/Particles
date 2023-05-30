@@ -4,6 +4,8 @@ public class CameraRotator : MonoBehaviour
 {
     [SerializeField] private float rotationSpeed = 2f;
 
+    private const float RotationClamp = 30f;
+
     private float mouseX;
     private float mouseY;
 
@@ -11,7 +13,8 @@ public class CameraRotator : MonoBehaviour
     {
         mouseX += Input.GetAxis("Mouse X") * rotationSpeed;
         mouseY -= Input.GetAxis("Mouse Y") * rotationSpeed;
-        mouseY = Mathf.Clamp(mouseY, -80f, 80f);
+        mouseX = Mathf.Clamp(mouseX, -RotationClamp, RotationClamp);
+        mouseY = Mathf.Clamp(mouseY, -RotationClamp, RotationClamp);
 
         Quaternion rotation = Quaternion.Euler(mouseY, mouseX, 0f);
         transform.rotation = rotation;
