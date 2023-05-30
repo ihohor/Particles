@@ -26,7 +26,7 @@ public class ParticleController : MonoBehaviour
         _inHale.Play();
         _inHalesCount++;
 
-        if (_inHalesCount < 10)
+        if (_inHalesCount < 5)
             Invoke(nameof(Exhale), Delay);
         else
             Invoke(nameof(DarkExHale), Delay);
